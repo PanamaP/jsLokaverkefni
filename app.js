@@ -161,8 +161,6 @@ for(i in uppskriftir){
 
     var picture = document.createElement("IMG");
     picture.setAttribute("src", uppskriftir[i].picture);
-    picture.setAttribute("width", "200");
-    picture.setAttribute("height", "200");
     divItem.appendChild(picture);
 
 
@@ -185,9 +183,11 @@ for(i in uppskriftir){
 
     // get every step in instructions and show
     for(j in uppskriftir[i].instructions){
-        test = document.createElement('p');
+        para = document.createElement('p');
+        para.id = 'instruction'
+
         instructions = document.createTextNode(uppskriftir[i].instructions[j]);
-        divItem.appendChild(test).appendChild(instructions);
+        divItem.appendChild(para).appendChild(instructions);
     }    
 
     
