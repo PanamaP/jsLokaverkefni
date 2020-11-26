@@ -124,18 +124,55 @@ var uppskriftir = {
         Season with salt and pepper. Serve steak topped with sauce and potatoes alongside.`],
         date: "Mar 15, 2019",
         picture: "pictures/strip-steak-mashed-potatoes.jpg"
-        },
+        }
 };
 
 
 // Template
 
+
+// container div for flexbox
 var div = document.createElement("div");
 div.id = "container";
 document.body.appendChild(div);
 divID = document.getElementById("container");
 
 
+// search bar
+var search = document.createElement("input");
+search.type = "text";
+search.placeholder = "filter by search";
+search.id = "searchBar";
+div.appendChild(search);
+
+
+   // Search bar function
+document.getElementById("searchBar").onkeyup = function(){
+    input = this.value.toLowerCase();
+    // put all recipes names in nodelist
+    find = document.querySelectorAll('#recipe_name');
+    // search through the list
+    for(x = 0; x < find.length; x++){
+        find[x].parentElement.style.display = "none";
+        // mjog ugly, en virkar.
+        // if input value is in any of the recipes return true
+        if(find[x].innerText.toLowerCase().includes(input) == true){
+            console.log(find[x].innerText.toLowerCase());
+            show = find[x].parentElement.style.display = "block";
+        }else{
+            show = find[x].parentElement.style.display = "none";
+        }
+        }
+        //console.log(find[x].innerText.toLowerCase().includes(input));
+};
+
+
+
+
+
+
+
+// go through each recipe
 for(i in uppskriftir){
 
     // create div for each recipe with class & id
@@ -145,7 +182,8 @@ for(i in uppskriftir){
 
     // show recipe name
     p = document.createElement("p");
-    recipe = document.createTextNode(`Recipe: ${uppskriftir[i].recipe}`)
+    p.id = "recipe_name";
+    recipe = document.createTextNode(uppskriftir[i].recipe)
     divItem.appendChild(p).appendChild(recipe);
 
     // show author name
@@ -195,11 +233,3 @@ for(i in uppskriftir){
 };
 
 
-
-/*
-var x = document.createElement("IMG");
-x.setAttribute("src", uppskriftir[1].picture);
-x.setAttribute("width", "200");
-x.setAttribute("height", "200");
-document.body.appendChild(x);
-*/
